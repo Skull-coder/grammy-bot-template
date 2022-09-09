@@ -1,4 +1,4 @@
-import { BotError, GrammyError, HttpError, Bot, Composer } from "grammy"
+import { BotError, GrammyError, HttpError } from "grammy"
 import logger from "../../plugins/logger"
 import { MyContext } from "../types/context"
 

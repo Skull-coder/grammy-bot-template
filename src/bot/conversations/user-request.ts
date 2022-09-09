@@ -6,12 +6,10 @@ export async function userRequest(
 ) {
     await ctx.reply("Hello! What is your name?");
     const username = await conversation.waitFor(":text");
-    await ctx.reply(
-        `Приятно познакомится, ${username.msg.text}. Сколько тебе лет?`,
-    );
+    await ctx.reply(`Nice to meet you ${username.msg.text}. How old are you?`);
 
     const age = await conversation.form.number();
     await ctx.reply(
-        `Добро пожаловать в бота, ${username.msg.text}. Вам ${age} лет.`,
+        `Welcome to the bot, ${username.msg.text}. You are ${age} years old.`,
     );
 }
