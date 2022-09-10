@@ -1,11 +1,14 @@
 import { Context as BaseContext, Api, SessionFlavor } from "grammy";
 import { HydrateFlavor, HydrateApiFlavor } from "@grammyjs/hydrate";
-import { AnyObject } from "../utils/session";
 import { User } from "@prisma/client";
+
+export interface SessionState {
+
+}
 
 export type MyContext = BaseContext &
     HydrateFlavor<BaseContext> &
-    SessionFlavor<AnyObject> & {
+    SessionFlavor<SessionState> & {
         user: User | null;
     };
 

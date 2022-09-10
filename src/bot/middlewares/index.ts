@@ -1,17 +1,19 @@
 import { conversations } from "@grammyjs/conversations";
-import { hydrateContext } from "@grammyjs/hydrate";
+import { hydrateApi, hydrateContext } from "@grammyjs/hydrate";
 import { parseMode } from "@grammyjs/parse-mode";
 import { apiThrottler } from "@grammyjs/transformer-throttler";
 import { session } from "grammy";
 import { bot } from "../";
-import { initial, storage } from "../utils/session";
+import { MyContext, SessionState } from "../types/context";
+import { storage } from "../utils/session";
 import { authMiddleware } from "./auth";
 
 export default async () => {
     bot.api.config.use(apiThrottler());
     bot.api.config.use(parseMode("HTML"));
+    bot.api.config.use(hydrateApi());
 
-    bot.use(session({ initial, storage }));
+    bot.use(session<SessionState, MyContext>({ initial: () => ({}), storage }));
     bot.use(conversations());
     bot.use(hydrateContext());
 
