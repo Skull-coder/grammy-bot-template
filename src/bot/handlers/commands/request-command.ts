@@ -1,5 +1,3 @@
-import { MyContext } from "../../types/context";
-
-export async function requestCommand(ctx: MyContext) {
+export async function requestCommand(ctx) {
     await ctx.conversation.enter("userRequest");
 }

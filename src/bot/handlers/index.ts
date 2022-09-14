@@ -1,12 +1,10 @@
-import { bot } from "../";
-import { isPrivate } from "../filters";
+import { userComposer } from "../";
 import commands from "./commands";
+import callbackQueries from "./callbackQueries";
 import converse from "./conversations";
-// You can add callbackQueries here
 
 export default async () => {
-    const privateBot = bot.filter(isPrivate);
-
-    await converse(privateBot);
-    await commands(privateBot);
+    await converse(userComposer);
+    await callbackQueries(userComposer);
+    await commands(userComposer);
 };
