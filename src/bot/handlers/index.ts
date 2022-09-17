@@ -1,10 +1,15 @@
-import { userComposer } from "../";
+import { adminBot, userBot } from "../";
+import adminCommands from "./commands/admin";
+import adminQueries from "./callbackQueries/admin";
 import commands from "./commands";
 import callbackQueries from "./callbackQueries";
 import converse from "./conversations";
 
 export default async () => {
-    await converse(userComposer);
-    await callbackQueries(userComposer);
-    await commands(userComposer);
+    await adminQueries(adminBot);
+    await adminCommands(adminBot);
+
+    await converse(userBot);
+    await callbackQueries(userBot);
+    await commands(userBot);
 };

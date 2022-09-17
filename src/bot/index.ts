@@ -6,10 +6,15 @@ import { MyApi, MyContext } from "./types/context";
 import middlewares from "./middlewares";
 import handlers from "./handlers";
 import { errorHandler } from "./handlers/errors";
-import { isPrivate } from "./filters";
+import { isAdmin, isPrivate } from "./filters";
+
 export const bot = new Bot<MyContext, MyApi>(config.BOT_TOKEN);
 
-export const userComposer = new Composer<MyContext>().filter(isPrivate);
+export const userComposer = new Composer<MyContext>();
+export const adminComposer = new Composer<MyContext>();
+
+export const userBot = userComposer.filter(isPrivate);
+export const adminBot = adminComposer.filter(isPrivate).filter(isAdmin);
 
 export default async (): Promise<void> => {
     await middlewares();

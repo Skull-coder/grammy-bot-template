@@ -3,7 +3,7 @@ import { hydrateApi, hydrateContext } from "@grammyjs/hydrate";
 import { parseMode } from "@grammyjs/parse-mode";
 import { apiThrottler } from "@grammyjs/transformer-throttler";
 import { session } from "grammy";
-import { bot, userComposer } from "../";
+import { adminComposer, bot, userComposer } from "../";
 import { MyContext, SessionState } from "../types/context";
 import { storage } from "../utils/session";
 import { authMiddleware } from "./auth";
@@ -17,6 +17,8 @@ export default async () => {
     bot.use(conversations());
     bot.use(hydrateContext());
 
-    bot.use(userComposer);
     bot.use(authMiddleware);
+
+    bot.use(adminComposer);
+    bot.use(userComposer);
 };
